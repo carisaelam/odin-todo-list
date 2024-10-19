@@ -39,20 +39,25 @@ describe('Task Class', () => {
     });
 
     it('should keep dueDate the same when given invalid date', () => {
-      expect(() => task.updateDueDate('invalid date')).to.throw(Error);
-      expect(task.dueDate).to.equal('2024-10-25');
+      expect(() => task.updateDueDate('invalid date')).toThrow(Error);
+      expect(task.dueDate).toBe('2024-10-25');
     });
 
     it('should keep dueDate the same when given date in the past', () => {
-      expect(() => task.updateDueDate('2020-10-25').to.throw(Error));
+      expect(() => task.updateDueDate('2020-10-25')).toThrow(Error);
       expect(task.dueDate).toBe('2024-10-25');
     });
   });
 
   describe('Update Priority', () => {
     it('should keep priority the same when given invalid number', () => {
-      expect(() => task.updatePriority(4).to.throw(Error));
+      expect(() => task.updatePriority(4)).toThrow(Error);
       expect(task.priority).toBe(3);
+    });
+
+    it('should update priority with valid number', () => {
+      task.updatePriority(1);
+      expect(task.priority).toBe(1);
     });
   });
 
@@ -67,7 +72,7 @@ describe('Task Class', () => {
         task.updateTitle(
           'asdfjkl;asdfjkl;asdfjkl;asdfjkl;asdfjkl;asdfjkl;asdfjkl;'
         )
-      ).to.throw(Error);
+      ).toThrow(Error);
       expect(task.title).toBe('Sample Task');
     });
   });
@@ -83,8 +88,18 @@ describe('Task Class', () => {
         task.updateDescription(
           'In the ever-evolving world of technology, staying updated is crucial for growth. Embrace new tools, learn continuously, and adapt to changes. Collaborate with others, share knowledge, and do not hesitate to ask for help. Together, we can overcome challenges and achieve great things. Keep pushing forward!'
         )
-      ).to.throw(Error);
+      ).toThrow(Error);
       expect(task.description).toBe('This is a sample task');
+    });
+  });
+
+  describe('Validate Due Date', () => {
+    it('should return true for valid date', () => {
+      expect(task.validateDueDate('2026-10-10')).toBe(true);
+    });
+
+    it('should return false for invalid date', () => {
+      expect(task.validateDueDate('2020-10-10')).toBe(false);
     });
   });
 });
