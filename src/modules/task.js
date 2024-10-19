@@ -44,7 +44,7 @@ export class Task {
     if ([1, 2, 3].includes(newPriority)) {
       this.priority = newPriority;
     } else {
-      console.error('Priority must be 1, 2, or 3');
+      console.error('Priority must be either 1, 2, or 3');
     }
   }
 
