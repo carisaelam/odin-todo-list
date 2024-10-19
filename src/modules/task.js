@@ -1,5 +1,5 @@
 export class Task {
-  constructor(title, description, dueDate, priority, isCompleted = false) {
+  constructor(title, description, dueDate, priority = 3, isCompleted = false) {
     (this.title = title),
       (this.description = description),
       (this.dueDate = dueDate),
@@ -18,5 +18,13 @@ export class Task {
 
   updateDescription(newDescription) {
     this.description = newDescription;
+  }
+
+  updateDueDate(newDueDate) {
+    this.dueDate = newDueDate;
+  }
+
+  updatePriority(newPriority) {
+    this.priority = newPriority;
   }
 }
