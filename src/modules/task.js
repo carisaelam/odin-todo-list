@@ -25,6 +25,10 @@ export class Task {
   }
 
   updatePriority(newPriority) {
-    this.priority = newPriority;
+    if ([1, 2, 3].includes(newPriority)) {
+      this.priority = newPriority;
+    } else {
+      console.error('Priority must be 1, 2, or 3');
+    }
   }
 }
