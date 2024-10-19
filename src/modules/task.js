@@ -8,27 +8,51 @@ export class Task {
     this.createdAt = new Date();
   }
 
-  toggleComplete() {
+  toggleCompleted() {
     this.isCompleted = !this.isCompleted;
   }
 
+  // Validates title length at <= 50
   updateTitle(newTitle) {
-    this.title = newTitle;
+    if (newTitle.length <= 50) {
+      this.title = newTitle;
+    } else {
+      console.error('Title must be 50 characters or less');
+    }
   }
 
+  // Validates description length at <= 250
   updateDescription(newDescription) {
-    this.description = newDescription;
+    if (newDescription.length <= 250) {
+      this.description = newDescription;
+    } else {
+      console.error('Description must be 250 characters or less');
+    }
   }
 
+  // Calls validateDueDate
   updateDueDate(newDueDate) {
-    this.dueDate = newDueDate;
+    if (this.validateDueDate(newDueDate)) {
+      this.dueDate = newDueDate;
+    } else {
+      console.error('Due date must be a valid date in the future.');
+    }
   }
 
+  // Validates priority as 1, 2, or 3
   updatePriority(newPriority) {
     if ([1, 2, 3].includes(newPriority)) {
       this.priority = newPriority;
     } else {
       console.error('Priority must be 1, 2, or 3');
     }
+  }
+
+  // Validates correct date object in future
+  validateDueDate(date) {
+    const dueDate = new Date(date);
+    const now = new Date();
+
+    return !isNaN(dueDate) && dueDate > now;
   }
 }
