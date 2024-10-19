@@ -17,7 +17,7 @@ export class Task {
     if (newTitle.length <= 50) {
       this.title = newTitle;
     } else {
-      console.error('Title must be 50 characters or less');
+      throw new Error('Title must be 50 characters or less');
     }
   }
 
@@ -26,7 +26,7 @@ export class Task {
     if (newDescription.length <= 250) {
       this.description = newDescription;
     } else {
-      console.error('Description must be 250 characters or less');
+      throw new Error('Description must be 250 characters or less');
     }
   }
 
@@ -35,7 +35,7 @@ export class Task {
     if (this.validateDueDate(newDueDate)) {
       this.dueDate = newDueDate;
     } else {
-      console.error('Due date must be a valid date in the future.');
+      throw new Error('Due date must be a valid date in the future.');
     }
   }
 
@@ -44,7 +44,7 @@ export class Task {
     if ([1, 2, 3].includes(newPriority)) {
       this.priority = newPriority;
     } else {
-      console.error('Priority must be either 1, 2, or 3');
+      throw new Error('Priority must be either 1, 2, or 3');
     }
   }
 

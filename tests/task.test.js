@@ -39,19 +39,19 @@ describe('Task Class', () => {
     });
 
     it('should keep dueDate the same when given invalid date', () => {
-      task.updateDueDate('random string');
-      expect(task.dueDate).toBe('2024-10-25');
+      expect(() => task.updateDueDate('invalid date')).to.throw(Error);
+      expect(task.dueDate).to.equal('2024-10-25');
     });
 
     it('should keep dueDate the same when given date in the past', () => {
-      task.updateDueDate('2020-10-25');
+      expect(() => task.updateDueDate('2020-10-25').to.throw(Error));
       expect(task.dueDate).toBe('2024-10-25');
     });
   });
 
   describe('Update Priority', () => {
     it('should keep priority the same when given invalid number', () => {
-      task.updatePriority(4);
+      expect(() => task.updatePriority(4).to.throw(Error));
       expect(task.priority).toBe(3);
     });
   });
@@ -63,9 +63,11 @@ describe('Task Class', () => {
     });
 
     it('should keep title the same when given invalid title', () => {
-      task.updateTitle(
-        'asdfjkl;asdfjkl;asdfjkl;asdfjkl;asdfjkl;asdfjkl;asdfjkl;'
-      );
+      expect(() =>
+        task.updateTitle(
+          'asdfjkl;asdfjkl;asdfjkl;asdfjkl;asdfjkl;asdfjkl;asdfjkl;'
+        )
+      ).to.throw(Error);
       expect(task.title).toBe('Sample Task');
     });
   });
@@ -77,9 +79,11 @@ describe('Task Class', () => {
     });
 
     it('should keep description the same when given invalid description', () => {
-      task.updateDescription(
-        'In the ever-evolving world of technology, staying updated is crucial for growth. Embrace new tools, learn continuously, and adapt to changes. Collaborate with others, share knowledge, and do not hesitate to ask for help. Together, we can overcome challenges and achieve great things. Keep pushing forward!'
-      );
+      expect(() =>
+        task.updateDescription(
+          'In the ever-evolving world of technology, staying updated is crucial for growth. Embrace new tools, learn continuously, and adapt to changes. Collaborate with others, share knowledge, and do not hesitate to ask for help. Together, we can overcome challenges and achieve great things. Keep pushing forward!'
+        )
+      ).to.throw(Error);
       expect(task.description).toBe('This is a sample task');
     });
   });
