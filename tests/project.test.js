@@ -53,6 +53,34 @@ describe('Project Class', () => {
       project.addTaskToProject(task3);
 
       expect(project.listCompletedTasks()).toEqual([task3]);
+      task3.toggleCompleted(); // clean up
+    });
+  });
+
+  // listInCompletedTasks
+  describe('List Incomplete Tasks', () => {
+    it('should list only completed tasks', () => {
+      task3.toggleCompleted();
+      project.addTaskToProject(task1);
+      project.addTaskToProject(task2);
+      project.addTaskToProject(task3);
+
+      expect(project.listIncompleteTasks()).toEqual([task1, task2]);
+    });
+  });
+
+  // findTaskByTitle
+  describe('Find Task By Title', () => {
+    it('should return task that matches given title', () => {
+      project.addTaskToProject(task1);
+      project.addTaskToProject(task2);
+      project.addTaskToProject(task3);
+
+      expect(project.findTaskByTitle(task1.title)).toEqual(task1);
+    });
+
+    it('should throw an error when task not found', () => {
+      expect(() => project.findTaskByTitle('invalid title')).toThrow(Error);
     });
   });
 });

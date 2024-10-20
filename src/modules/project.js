@@ -25,7 +25,6 @@ export class Project {
   }
 
   listCompletedTasks() {
-    console.log('running listCompleted');
     let completedTasks = [];
     this.tasks.forEach((task) => {
       if (task.isCompleted === true) {
@@ -36,11 +35,13 @@ export class Project {
   }
 
   listIncompleteTasks() {
+    let incompleteTasks = [];
     this.tasks.forEach((task) => {
       if (task.isCompleted === false) {
-        console.log(task.title);
+        incompleteTasks.push(task);
       }
     });
+    return incompleteTasks;
   }
 
   findTaskByTitle(title) {
