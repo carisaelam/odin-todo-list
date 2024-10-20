@@ -70,9 +70,7 @@ export class Task {
   updatePriority(newPriority) {
     if (this.validatePriority(newPriority)) {
       this.priority = newPriority;
-    } else {
-      throw new Error('Priority must be either 1, 2, or 3');
-    }
+    } 
   }
 
   // Validates title length at <= 50
@@ -80,7 +78,7 @@ export class Task {
     if (newTitle.length > 50) {
       throw new Error('Title cannot exceed 50 characters');
     }
-    return newTitle;
+    return true;
   }
 
   // Validates description length at <= 250
@@ -88,7 +86,7 @@ export class Task {
     if (newDescription.length > 250) {
       throw new Error('Description cannot exceed 250 characters.');
     }
-    return newDescription;
+    return true;
   }
 
   // Validates correct date object in future
@@ -107,6 +105,6 @@ export class Task {
     if (![1, 2, 3].includes(newPriority)) {
       throw new Error('Priority must be 1, 2, or 3');
     }
-    return newPriority;
+    return true;
   }
 }

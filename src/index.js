@@ -33,7 +33,7 @@ const task3 = new Task('Third task', 'third description', '2024-12-29');
 const task4 = new Task('Fourth task', 'fourth description', '2024-12-28');
 const task5 = new Task('Fifth task', 'fifth description', '2024-12-20', 1);
 const task6 = new Task('Sixth task', 'sixth description', '2024-12-18', 2);
-const task7 = new Task('Seventh task', 'seventh description', '1999-01-01');
+const task7 = new Task('Seventh task', 'seventh description', '2025-01-01');
 
 const project1 = new Project();
 
