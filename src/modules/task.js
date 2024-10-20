@@ -70,7 +70,7 @@ export class Task {
   updatePriority(newPriority) {
     if (this.validatePriority(newPriority)) {
       this.priority = newPriority;
-    } 
+    }
   }
 
   // Validates title length at <= 50

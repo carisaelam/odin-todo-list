@@ -14,20 +14,25 @@ export class Project {
   }
 
   listTasks() {
+    const tasks = [];
     this.tasks.forEach((task) => {
       console.log(task.title);
       console.log(format(task.dueDate, 'MM/dd/yyyy'));
       console.log(task.priority);
-      return task;
+      tasks.push(task);
     });
+    return tasks;
   }
 
   listCompletedTasks() {
+    console.log('running listCompleted');
+    let completedTasks = [];
     this.tasks.forEach((task) => {
       if (task.isCompleted === true) {
-        console.log(task.title);
+        completedTasks.push(task);
       }
     });
+    return completedTasks;
   }
 
   listIncompleteTasks() {
