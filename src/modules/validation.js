@@ -34,22 +34,20 @@ export class Validation {
     return true;
   }
 
-
   // Project creation validation
   validateProject(project) {
     let errors = [];
+
     try {
       this.validateTitle(project.title);
     } catch (error) {
-      throw new Error('Title must not exceed 50 characters');
+      errors.push(error.message);
     }
 
     if (errors.length > 0) {
-      console.log(errors.join(', '));
       throw new Error(errors.join(', '));
     }
   }
-
 
   // Task creation validation
   validateTask(task) {

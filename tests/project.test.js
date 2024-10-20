@@ -14,6 +14,7 @@ describe('Project Class', () => {
 
   // Constructor Validation
   describe('Constructor Validation', () => {
+    
     // Title
     it('should apply valid title to project', () => {
       expect(project.title).toEqual('Test Project');
@@ -27,6 +28,7 @@ describe('Project Class', () => {
     it('should default to an empty array', () => {
       expect(project.tasks).toEqual([]);
     });
+
   });
 
   // addTaskToProject

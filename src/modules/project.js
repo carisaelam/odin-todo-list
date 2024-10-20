@@ -9,8 +9,6 @@ export class Project {
     this.tasks = tasks;
   }
 
-
-
   addTaskToProject(task) {
     this.tasks.push(task);
   }
