@@ -1,16 +1,18 @@
 import format from 'date-fns/format';
+import { Validation } from './validation';
+const validation = new Validation();
 
 export class Project {
   constructor(title = 'New Project', tasks = []) {
     this.validateProject({ title });
-    this.title = title
+    this.title = title;
     this.tasks = tasks;
   }
 
   validateProject(project) {
     let errors = [];
     try {
-      this.validateTitle(project.title);
+      validation.validateTitle(project.title);
     } catch (error) {
       throw new Error('Title must not exceed 50 characters');
     }
@@ -67,12 +69,5 @@ export class Project {
       throw new Error(`No task found with title ${title}`);
     }
     return foundTask;
-  }
-  
-  validateTitle(title){
-    if (title.length > 50) {
-      throw new Error('Title cannot exceed 50 characters');
-    }
-    return true;
   }
 }
