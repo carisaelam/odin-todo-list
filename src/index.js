@@ -40,7 +40,3 @@ const project1 = new Project();
 project1.addTaskToProject(task1);
 project1.addTaskToProject(task6);
 project1.addTaskToProject(task7);
-
-project1.listTasks();
-project1.findTaskByTitle('Sixth task');
-// project1.findTaskByTitle('Seventh task');

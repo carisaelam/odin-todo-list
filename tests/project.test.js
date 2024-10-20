@@ -9,7 +9,24 @@ describe('Project Class', () => {
   const task3 = new Task('Task3', 'Desc3', '2035-12-25');
 
   beforeEach(() => {
-    project = new Project();
+    project = new Project('Test Project');
+  });
+
+  // Constructor Validation
+  describe('Constructor Validation', () => {
+    // Title
+    it('should apply valid title to project', () => {
+      expect(project.title).toEqual('Test Project');
+    });
+
+    it('should throw error for title longer than 50 characters', () => {
+      expect(() => new Project('x'.repeat(51))).toThrow(Error);
+    });
+
+    // Tasks
+    it('should default to an empty array', () => {
+      expect(project.tasks).toEqual([]);
+    });
   });
 
   // addTaskToProject

@@ -1,8 +1,24 @@
 import format from 'date-fns/format';
 
 export class Project {
-  constructor(tasks = []) {
+  constructor(title = 'New Project', tasks = []) {
+    this.validateProject({ title });
+    this.title = title
     this.tasks = tasks;
+  }
+
+  validateProject(project) {
+    let errors = [];
+    try {
+      this.validateTitle(project.title);
+    } catch (error) {
+      throw new Error('Title must not exceed 50 characters');
+    }
+
+    if (errors.length > 0) {
+      console.log(errors.join(', '));
+      throw new Error(errors.join(', '));
+    }
   }
 
   addTaskToProject(task) {
@@ -51,5 +67,12 @@ export class Project {
       throw new Error(`No task found with title ${title}`);
     }
     return foundTask;
+  }
+  
+  validateTitle(title){
+    if (title.length > 50) {
+      throw new Error('Title cannot exceed 50 characters');
+    }
+    return true;
   }
 }
