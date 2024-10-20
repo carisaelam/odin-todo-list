@@ -33,4 +33,54 @@ export class Validation {
     }
     return true;
   }
+
+
+  // Project creation validation
+  validateProject(project) {
+    let errors = [];
+    try {
+      this.validateTitle(project.title);
+    } catch (error) {
+      throw new Error('Title must not exceed 50 characters');
+    }
+
+    if (errors.length > 0) {
+      console.log(errors.join(', '));
+      throw new Error(errors.join(', '));
+    }
+  }
+
+
+  // Task creation validation
+  validateTask(task) {
+    let errors = [];
+
+    try {
+      this.validateTitle(task.title);
+    } catch (error) {
+      errors.push(error.message);
+    }
+
+    try {
+      this.validateDescription(task.description);
+    } catch (error) {
+      errors.push(error.message);
+    }
+
+    try {
+      this.validateDueDate(task.dueDate);
+    } catch (error) {
+      errors.push(error.message);
+    }
+
+    try {
+      this.validatePriority(task.priority);
+    } catch (error) {
+      errors.push(error.message);
+    }
+
+    if (errors.length > 0) {
+      throw new Error(errors.join(', '));
+    }
+  }
 }

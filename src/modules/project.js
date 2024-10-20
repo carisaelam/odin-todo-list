@@ -4,24 +4,12 @@ const validation = new Validation();
 
 export class Project {
   constructor(title = 'New Project', tasks = []) {
-    this.validateProject({ title });
+    validation.validateProject({ title });
     this.title = title;
     this.tasks = tasks;
   }
 
-  validateProject(project) {
-    let errors = [];
-    try {
-      validation.validateTitle(project.title);
-    } catch (error) {
-      throw new Error('Title must not exceed 50 characters');
-    }
 
-    if (errors.length > 0) {
-      console.log(errors.join(', '));
-      throw new Error(errors.join(', '));
-    }
-  }
 
   addTaskToProject(task) {
     this.tasks.push(task);
