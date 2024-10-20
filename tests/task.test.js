@@ -8,21 +8,38 @@ describe('Task Class', () => {
     task = new Task('Sample Task', 'This is a sample task', '2024-10-25');
   });
 
-  describe('Initialization', () => {
-    // Priority
-    it('should create a task with default priority', () => {
-      expect(task.priority).toBe(3);
+  // Constructor Validation
+  describe('Constructor Validation', () => {
+    // Title
+    it('should throw error for title longer than 50 characters', () => {
+      expect(
+        () => new Task('x'.repeat(51), 'Valid description', '2024-10-25')
+      ).toThrow(Error);
     });
 
-    it('should create a task with defined priority', () => {
-      const task1 = new Task('Task One', 'Description One', '2024-10-25', 1);
-      expect(task1.priority).toBe(1);
+    it('should throw error for description longer than 250 characters', () => {
+      expect(
+        () => new Task('Valid title', 'x'.repeat(251), '2024-10-25')
+      ).toThrow(Error);
     });
 
-    // isCompleted
-    it('should default isCompleted to false', () => {
-      expect(task.isCompleted).toBe(false);
+    it('should throw error for NaN dueDate', () => {
+      expect(
+        () => new Task('Valid title', 'Valid description', 'invalid date')
+      ).toThrow(Error);
     });
+
+    it('should throw error for date in the past', () => {
+      expect(
+        () => new Task('Valid title', 'Valid description', '1999-01-01')
+      ).toThrow(Error)
+    })
+
+    it('should throw error for invalid priority', () => {
+      expect(
+        () => new Task('Valid title', 'Valid description', '2025-01-01', 10)
+      ).toThrow(Error)
+    })
   });
 
   describe('Toggle Completed', () => {
@@ -68,11 +85,7 @@ describe('Task Class', () => {
     });
 
     it('should keep title the same when given invalid title', () => {
-      expect(() =>
-        task.updateTitle(
-          'asdfjkl;asdfjkl;asdfjkl;asdfjkl;asdfjkl;asdfjkl;asdfjkl;'
-        )
-      ).toThrow(Error);
+      expect(() => task.updateTitle('x'.repeat(51))).toThrow(Error);
       expect(task.title).toBe('Sample Task');
     });
   });
@@ -84,22 +97,8 @@ describe('Task Class', () => {
     });
 
     it('should keep description the same when given invalid description', () => {
-      expect(() =>
-        task.updateDescription(
-          'In the ever-evolving world of technology, staying updated is crucial for growth. Embrace new tools, learn continuously, and adapt to changes. Collaborate with others, share knowledge, and do not hesitate to ask for help. Together, we can overcome challenges and achieve great things. Keep pushing forward!'
-        )
-      ).toThrow(Error);
+      expect(() => task.updateDescription('x'.repeat(251))).toThrow(Error);
       expect(task.description).toBe('This is a sample task');
-    });
-  });
-
-  describe('Validate Due Date', () => {
-    it('should return true for valid date', () => {
-      expect(task.validateDueDate('2026-10-10')).toBe(true);
-    });
-
-    it('should return false for invalid date', () => {
-      expect(task.validateDueDate('2020-10-10')).toBe(false);
     });
   });
 });

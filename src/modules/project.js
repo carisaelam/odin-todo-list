@@ -39,11 +39,11 @@ export class Project {
   }
 
   findTaskByTitle(title) {
-    this.tasks.forEach((task) => {
-      if (task.title === title) {
-        console.log(task);
-        return task;
-      }
-    });
+    const foundTask = this.tasks.find((task) => task.title === title);
+
+    if (!foundTask) {
+      throw new Error(`No task found with title ${title}`);
+    }
+    return foundTask;
   }
 }
