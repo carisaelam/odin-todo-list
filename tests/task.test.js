@@ -17,12 +17,14 @@ describe('Task Class', () => {
       ).toThrow(Error);
     });
 
+    // Description
     it('should throw error for description longer than 250 characters', () => {
       expect(
         () => new Task('Valid title', 'x'.repeat(251), '2024-10-25')
       ).toThrow(Error);
     });
 
+    // Due Date
     it('should throw error for NaN dueDate', () => {
       expect(
         () => new Task('Valid title', 'Valid description', 'invalid date')
@@ -35,10 +37,19 @@ describe('Task Class', () => {
       ).toThrow(Error);
     });
 
+    // Priority
     it('should throw error for invalid priority', () => {
       expect(
         () => new Task('Valid title', 'Valid description', '2025-01-01', 10)
       ).toThrow(Error);
+    });
+
+    // Project
+
+    it('should default to inbox as the project', () => {
+      const task1 = new Task('Valid title', 'Valid description', '2025-01-01');
+
+      expect(task1.project).toEqual('Inbox');
     });
   });
 

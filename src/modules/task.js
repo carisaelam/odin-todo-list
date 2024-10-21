@@ -2,13 +2,21 @@ import { Validation } from './validation';
 const validation = new Validation();
 
 export class Task {
-  constructor(title, description, dueDate, priority = 3, isCompleted = false) {
+  constructor(
+    title,
+    description,
+    dueDate,
+    priority = 3,
+    isCompleted = false,
+    project = 'Inbox'
+  ) {
     validation.validateTask({ title, description, dueDate, priority });
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.isCompleted = isCompleted;
+    this.project = project;
     this.createdAt = new Date();
   }
 
