@@ -7,6 +7,7 @@ const addTaskForm = document.querySelector('.add-task-form');
 const titleInput = document.getElementById('title');
 const descriptionInput = document.getElementById('description');
 const dueDateInput = document.getElementById('due-date');
+const projectInput = document.getElementById('project');
 const taskDisplay = document.querySelector('.task__display');
 const projectDisplay = document.querySelector('.project__display');
 
@@ -16,16 +17,21 @@ addTaskForm.addEventListener('submit', (e) => {
   const task = new Task(
     titleInput.value,
     descriptionInput.value,
-    dueDateInput.value
+    dueDateInput.value,
+    undefined,
+    undefined,
+    projectInput.value
   );
   console.log(task);
   project1.addTaskToProject(task);
-  taskDisplay.textContent = JSON.stringify(task);
   project1.listTasks();
+  const taskListElement1 = tasksListed(project1);
+  projectDisplay.appendChild(taskListElement1);
 
   titleInput.value = '';
   descriptionInput.value = '';
   dueDateInput.value = '';
+  projectInput.value = '';
 });
 
 const task1 = new Task('First task', 'first description', '2024-12-31');
@@ -58,11 +64,12 @@ function tasksListed(project) {
   tasks.forEach((task) => {
     const taskElement = document.createElement('div');
     taskElement.innerHTML = `
-    <h3>${task.title}</h3>
-    <p>${task.description}</p>
-    <p>${task.dueDate}</p>
-    <p>${task.priority}</p>
-    <p>${task.createdAt}</p>
+    <h3>Title: ${task.title}</h3>
+    <p>Description: ${task.description}</p>
+    <p>Due Date: ${task.dueDate}</p>
+    <p>Priority: ${task.priority}</p>
+    <p>Project: ${task.project}</p>
+    <p>Created: ${task.createdAt}</p>
     `;
 
     html.appendChild(taskElement);
@@ -71,5 +78,5 @@ function tasksListed(project) {
   return html;
 }
 
-const taskListElement = tasksListed(project2);
-projectDisplay.appendChild(taskListElement);
+const taskListElement1 = tasksListed(project1);
+projectDisplay.appendChild(taskListElement1);
