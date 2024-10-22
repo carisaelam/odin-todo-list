@@ -8,11 +8,36 @@ const titleInput = document.getElementById('title');
 const descriptionInput = document.getElementById('description');
 const dueDateInput = document.getElementById('due-date');
 const projectInput = document.getElementById('project');
-const taskDisplay = document.querySelector('.task__display');
+const newProjectInput = document.getElementById('new-project');
 const projectDisplay = document.querySelector('.project__display');
+
+const inbox = new Project('Inbox');
+const workProject = new Project('Work');
+const personalProject = new Project('Personal');
+
+const projects = [inbox, workProject, personalProject];
+
+projectInput.addEventListener('change', (e) => {
+  if (e.target.value === 'new') {
+    newProjectInput.style.display = 'block';
+  } else {
+    newProjectInput.style.display = 'none';
+    newProjectInput.value = '';
+  }
+});
 
 addTaskForm.addEventListener('submit', (e) => {
   e.preventDefault();
+
+  let selectedProject = projects.find(
+    (project) =>
+      project.title.toLowerCase() === projectInput.value.toLowerCase()
+  );
+
+  if (projectInput.value === 'new' && newProjectInput.value) {
+    selectedProject = new Project(newProjectInput.value);
+    projects.push(selectedProject);
+  }
 
   const task = new Task(
     titleInput.value,
@@ -20,13 +45,19 @@ addTaskForm.addEventListener('submit', (e) => {
     dueDateInput.value,
     undefined,
     undefined,
-    projectInput.value
+    selectedProject
   );
   console.log(task);
-  project1.addTaskToProject(task);
-  project1.listTasks();
-  const taskListElement1 = tasksListed(project1);
+  selectedProject.addTaskToProject(task);
+  selectedProject.listTasks();
+  const taskListElement1 = tasksListed(inbox);
+  projectDisplay.textContent = '';
   projectDisplay.appendChild(taskListElement1);
+
+  projects.forEach((project) => {
+    const taskListElement1 = tasksListed(project);
+    projectDisplay.appendChild(taskListElement1);
+  });
 
   titleInput.value = '';
   descriptionInput.value = '';
@@ -42,24 +73,23 @@ const task5 = new Task('Fifth task', 'fifth description', '2024-12-20', 1);
 const task6 = new Task('Sixth task', 'sixth description', '2024-12-18', 2);
 const task7 = new Task('Seventh task', 'seventh description', '2025-01-01');
 
-const project1 = new Project('Project 1');
-const project2 = new Project('Project 2');
+// inbox.addTaskToProject(task1);
+// inbox.addTaskToProject(task2);
+// inbox.addTaskToProject(task3);
+// inbox.addTaskToProject(task4);
+// inbox.addTaskToProject(task5);
+// inbox.addTaskToProject(task6);
+// inbox.addTaskToProject(task7);
 
-project1.addTaskToProject(task1);
-project1.addTaskToProject(task2);
-project1.addTaskToProject(task3);
-
-project2.addTaskToProject(task4);
-project2.addTaskToProject(task5);
-project2.addTaskToProject(task6);
-project2.addTaskToProject(task7);
-
-console.log('project1: ', project1);
-console.log('project2: ', project2);
+console.log('inbox: ', inbox);
 
 function tasksListed(project) {
   const tasks = project.listTasks();
   const html = document.createElement('div');
+
+  const titleElement = document.createElement('h3');
+  titleElement.textContent = project.title;
+  html.appendChild(titleElement);
 
   tasks.forEach((task) => {
     const taskElement = document.createElement('div');
@@ -68,7 +98,7 @@ function tasksListed(project) {
     <p>Description: ${task.description}</p>
     <p>Due Date: ${task.dueDate}</p>
     <p>Priority: ${task.priority}</p>
-    <p>Project: ${task.project}</p>
+    <p>Project: ${task.project.title}</p>
     <p>Created: ${task.createdAt}</p>
     `;
 
@@ -77,6 +107,3 @@ function tasksListed(project) {
 
   return html;
 }
-
-const taskListElement1 = tasksListed(project1);
-projectDisplay.appendChild(taskListElement1);

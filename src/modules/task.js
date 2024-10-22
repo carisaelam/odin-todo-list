@@ -8,7 +8,7 @@ export class Task {
     dueDate,
     priority = 3,
     isCompleted = false,
-    project = 'Inbox'
+    project
   ) {
     validation.validateTask({ title, description, dueDate, priority });
     this.title = title;
