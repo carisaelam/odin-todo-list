@@ -18,7 +18,22 @@
       <label for="due_date">Due Date</label>
       <input type="date" name="due-date" id="due-date" />
 
-      <input type="submit" value="Submit" />
+      <label for="project">Project</label>
+      <select name="project" id="project">
+        <option value="inbox">Inbox</option>
+        <option value="work">Work</option>
+        <option value="personal">Personal</option>
+        <option value="new">Create New Project</option>
+      </select>
+
+      <input
+        type="text"
+        name="new-project"
+        id="new-project"
+        placeholder="New Project"
+        style="display: none"
+      />
+      <input type="submit" value="Add Task" />
     </form>
 
     <div class="task__display"></div>
@@ -26,5 +41,7 @@
     <h2>Projects</h2>
     <div class="project__display">
     </div>
+
+    <div class="project__display"></div>
   </body>
 </html>
