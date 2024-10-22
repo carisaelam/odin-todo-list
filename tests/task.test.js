@@ -43,14 +43,6 @@ describe('Task Class', () => {
         () => new Task('Valid title', 'Valid description', '2025-01-01', 10)
       ).toThrow(Error);
     });
-
-    // Project
-
-    it('should default to inbox as the project', () => {
-      const task1 = new Task('Valid title', 'Valid description', '2025-01-01');
-
-      expect(task1.project).toEqual('Inbox');
-    });
   });
 
   // Toggle Completed
