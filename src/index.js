@@ -15,28 +15,52 @@ const newProjectForm = document.querySelector('.new__project__form');
 const inbox = new Project('Inbox');
 const projects = [];
 
+function createProject(title) {
+  const newProject = new Project(title);
+  projects.push(newProject);
+  addProjectsToDropdown(newProject);
+  return newProject;
+}
+
 function addProjectsToDropdown(project) {
   const projectOption = document.createElement('option');
   projectOption.innerHTML = `${project.title}`;
   projectInput.appendChild(projectOption);
-  projects.push(project);
 }
 
-addProjectsToDropdown(inbox);
+// Initialize with Inbox
+createProject('Inbox');
 
 newProjectForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  const newProject = new Project(newProjectInput.value);
-  addProjectsToDropdown(newProject);
+  createProject(newProjectInput.value);
   newProjectInput.value = '';
-  listAllProjects(projects);
 });
 
 function listAllProjects(projects) {
+  if (projects.length === 0) {
+    console.log('No projects available');
+  }
+
   projects.forEach((project) => {
     console.log(project.title);
   });
 }
+
+function listSpecificProject(title) {
+  const foundProject = projects.find(
+    (project) => project.title.toLowerCase() === title.toLowerCase()
+  );
+
+  if (!foundProject) {
+    console.log(`${title} not found.`);
+    return;
+  }
+
+  console.log(foundProject);
+  return foundProject;
+}
+
 
 addTaskForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -50,8 +74,6 @@ addTaskForm.addEventListener('submit', (e) => {
   if (!selectedProject) {
     selectedProject = inbox;
   }
-
-  console.log('selected project', selectedProject);
 
   // Creates a new Task with user input and selectedProject
   const task = new Task(
@@ -68,48 +90,8 @@ addTaskForm.addEventListener('submit', (e) => {
 
   projectDisplay.textContent = '';
 
-  // Calls tasksListed for each project in the array
-  projects.forEach((project) => {
-    const taskListElement = tasksListed(project);
-    projectDisplay.appendChild(taskListElement);
-  });
-
   titleInput.value = '';
   descriptionInput.value = '';
   dueDateInput.value = '';
   projectInput.value = '';
 });
-
-// Creates and appends html for projects
-function tasksListed(project) {
-  const tasks = project.listTasks();
-  const html = document.createElement('div');
-
-  const titleElement = document.createElement('h3');
-  titleElement.textContent = project.title;
-  html.appendChild(titleElement);
-
-  tasks.forEach((task) => {
-    const taskElement = document.createElement('div');
-    taskElement.innerHTML = `
-    <h3>Title: ${task.title}</h3>
-    <p>Description: ${task.description}</p>
-    <p>Due Date: ${task.dueDate}</p>
-    <p>Priority: ${task.priority}</p>
-    <p>Project: ${task.project.title}</p>
-    <p>Created: ${task.createdAt}</p>
-    `;
-
-    html.appendChild(taskElement);
-  });
-
-  return html;
-}
-
-const task1 = new Task('First task', 'first description', '2024-12-31');
-const task2 = new Task('Second task', 'second description', '2024-12-30');
-const task3 = new Task('Third task', 'third description', '2024-12-29');
-const task4 = new Task('Fourth task', 'fourth description', '2024-12-28');
-const task5 = new Task('Fifth task', 'fifth description', '2024-12-20', 1);
-const task6 = new Task('Sixth task', 'sixth description', '2024-12-18', 2);
-const task7 = new Task('Seventh task', 'seventh description', '2025-01-01');
