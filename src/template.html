@@ -20,22 +20,23 @@
 
       <label for="project">Project</label>
       <select name="project" id="project">
-        <option value="inbox">Inbox</option>
-        <option value="work">Work</option>
-        <option value="personal">Personal</option>
-        <option value="new">Create New Project</option>
+        <!-- <option value="inbox">Inbox</option> -->
+        <option value="create-new">Create New Project</option>
       </select>
 
+      <input type="submit" value="Add Task" />
+    </form>
+
+    <br />
+    <form class="new__project__form">
       <input
         type="text"
         name="new-project"
         id="new-project"
         placeholder="New Project"
-        style="display: none"
       />
-      <input type="submit" value="Add Task" />
+      <input type="submit" value="Create" />
     </form>
-
 
     <div class="project__display"></div>
   </body>
