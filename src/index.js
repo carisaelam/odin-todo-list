@@ -13,10 +13,7 @@ const projectDisplay = document.querySelector('.project__display');
 const newProjectForm = document.querySelector('.new__project__form');
 
 const inbox = new Project('Inbox');
-const tester = new Project('Tester');
 const projects = [];
-
-console.log('projects', projects);
 
 function addProjectsToDropdown(project) {
   const projectOption = document.createElement('option');
@@ -29,10 +26,17 @@ addProjectsToDropdown(inbox);
 
 newProjectForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  console.log(projects);
   const newProject = new Project(newProjectInput.value);
   addProjectsToDropdown(newProject);
+  newProjectInput.value = '';
+  listAllProjects(projects);
 });
+
+function listAllProjects(projects) {
+  projects.forEach((project) => {
+    console.log(project.title);
+  });
+}
 
 addTaskForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -48,11 +52,6 @@ addTaskForm.addEventListener('submit', (e) => {
   }
 
   console.log('selected project', selectedProject);
-
-  // Pushes new project into projects array
-  // if (projectInput.value === 'new' && newProjectInput.value) {
-  //   createProject(newProjectInput.value);
-  // }
 
   // Creates a new Task with user input and selectedProject
   const task = new Task(
