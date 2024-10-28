@@ -24,11 +24,6 @@ export class ProjectManager {
 
   // Lists all projects
   listAllProjects() {
-    if (this.projects.length === 0) {
-      console.log('No projects available');
-      return [];
-    }
-
     const projectTitles = this.projects.map((project) => project.title);
     console.log(projectTitles);
     return projectTitles;

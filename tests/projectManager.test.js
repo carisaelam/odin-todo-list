@@ -29,6 +29,7 @@ describe('Project Manager Class', () => {
     });
 
     it('should return null if project exists', () => {
+      const newProject = projectManager.createProject('Work');
       const newerProject = projectManager.createProject('Work');
       expect(newerProject).toBeNull;
     });
@@ -43,6 +44,21 @@ describe('Project Manager Class', () => {
     it('should work with an added project', () => {
       projectManager.createProject('Work');
       expect(projectManager.listAllProjects()).toEqual(['Inbox', 'Work']);
+    });
+  });
+
+  // List Specific Project
+  describe('List Specific Project', () => {
+    it('should list specific project by title', () => {
+      const specificListed = projectManager.listSpecificProject('Inbox');
+
+      expect(specificListed.title).toEqual('Inbox');
+    });
+
+    it('should return null if no project found', () => {
+      const specificListed = projectManager.listSpecificProject('Invalid');
+
+      expect(specificListed).toBeNull;
     });
   });
 });
