@@ -2,6 +2,7 @@ import './style.css';
 
 import { Task } from './modules/task.js';
 import { Project } from './modules/project.js';
+import { ProjectManager } from './modules/projectManager.js';
 
 // DOM Elements
 const addTaskForm = document.querySelector('.add-task-form');
@@ -14,7 +15,7 @@ const projectDisplay = document.querySelector('.project__display');
 const newProjectForm = document.querySelector('.new__project__form');
 
 // Variables
-const inbox = new Project('Inbox');
+const projectManager = new ProjectManager();
 
 // Adds a project option to dropdown UI
 function addProjectsToDropdown(project) {
@@ -25,16 +26,19 @@ function addProjectsToDropdown(project) {
 }
 
 // Initialize with Inbox
-createProject('Inbox');
-
+addProjectsToDropdown(projectManager.projects[0]);
 
 // EVENT LISTENERS
 
 // Creates new project and updates dropdown menu
 newProjectForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  const project = createProject(newProjectInput.value);
-  addProjectsToDropdown(project);
+  const project = projectManager.createProject(newProjectInput.value);
+
+  if (project) {
+    addProjectsToDropdown(project);
+  }
+
   newProjectInput.value = '';
 });
 
@@ -44,13 +48,13 @@ addTaskForm.addEventListener('submit', (e) => {
 
   // Sets selectedProject as the element in the projects array that matches the project.title
   const selectedProjectTitle = projectInput.value || 'Inbox';
-  let selectedProject = projects.find(
+  let selectedProject = projectManager.projects.find(
     (project) =>
       project.title.toLowerCase() === selectedProjectTitle.toLowerCase()
   );
 
   if (!selectedProject) {
-    selectedProject = inbox;
+    selectedProject = projectManager.projects[0];
   }
 
   // Creates a new Task with user input and selectedProject
