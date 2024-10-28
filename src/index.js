@@ -3,6 +3,7 @@ import './style.css';
 import { Task } from './modules/task.js';
 import { Project } from './modules/project.js';
 
+// DOM Elements
 const addTaskForm = document.querySelector('.add-task-form');
 const titleInput = document.getElementById('title');
 const descriptionInput = document.getElementById('description');
@@ -12,18 +13,13 @@ const newProjectInput = document.getElementById('new-project');
 const projectDisplay = document.querySelector('.project__display');
 const newProjectForm = document.querySelector('.new__project__form');
 
+// Variables
 const inbox = new Project('Inbox');
-const projects = [];
 
-function createProject(title) {
-  const newProject = new Project(title);
-  projects.push(newProject);
-  addProjectsToDropdown(newProject);
-  return newProject;
-}
-
+// Adds a project option to dropdown UI
 function addProjectsToDropdown(project) {
   const projectOption = document.createElement('option');
+  projectOption.value = project.title;
   projectOption.innerHTML = `${project.title}`;
   projectInput.appendChild(projectOption);
 }
@@ -31,44 +27,26 @@ function addProjectsToDropdown(project) {
 // Initialize with Inbox
 createProject('Inbox');
 
+
+// EVENT LISTENERS
+
+// Creates new project and updates dropdown menu
 newProjectForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  createProject(newProjectInput.value);
+  const project = createProject(newProjectInput.value);
+  addProjectsToDropdown(project);
   newProjectInput.value = '';
 });
 
-function listAllProjects(projects) {
-  if (projects.length === 0) {
-    console.log('No projects available');
-  }
-
-  projects.forEach((project) => {
-    console.log(project.title);
-  });
-}
-
-function listSpecificProject(title) {
-  const foundProject = projects.find(
-    (project) => project.title.toLowerCase() === title.toLowerCase()
-  );
-
-  if (!foundProject) {
-    console.log(`${title} not found.`);
-    return;
-  }
-
-  console.log(foundProject);
-  return foundProject;
-}
-
-
+// Creates a new task and assigns to project
 addTaskForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
   // Sets selectedProject as the element in the projects array that matches the project.title
+  const selectedProjectTitle = projectInput.value || 'Inbox';
   let selectedProject = projects.find(
     (project) =>
-      project.title.toLowerCase() === projectInput.value.toLowerCase()
+      project.title.toLowerCase() === selectedProjectTitle.toLowerCase()
   );
 
   if (!selectedProject) {

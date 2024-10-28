@@ -16,7 +16,7 @@ export class Task {
     this.dueDate = dueDate;
     this.priority = priority;
     this.isCompleted = isCompleted;
-    this.project = project;
+    // this.project = project;
     this.createdAt = new Date();
   }
 

@@ -5,7 +5,7 @@ describe('Task Class', () => {
   let task;
 
   beforeEach(() => {
-    task = new Task('Sample Task', 'This is a sample task', '2024-10-25');
+    task = new Task('Sample Task', 'This is a sample task', '2035-10-25');
   });
 
   // Constructor Validation
@@ -13,14 +13,14 @@ describe('Task Class', () => {
     // Title
     it('should throw error for title longer than 50 characters', () => {
       expect(
-        () => new Task('x'.repeat(51), 'Valid description', '2024-10-25')
+        () => new Task('x'.repeat(51), 'Valid description', '2035-10-25')
       ).toThrow(Error);
     });
 
     // Description
     it('should throw error for description longer than 250 characters', () => {
       expect(
-        () => new Task('Valid title', 'x'.repeat(251), '2024-10-25')
+        () => new Task('Valid title', 'x'.repeat(251), '2035-10-25')
       ).toThrow(Error);
     });
 

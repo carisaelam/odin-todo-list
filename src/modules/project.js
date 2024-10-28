@@ -31,23 +31,11 @@ export class Project {
   }
 
   listCompletedTasks() {
-    let completedTasks = [];
-    this.tasks.forEach((task) => {
-      if (task.isCompleted === true) {
-        completedTasks.push(task);
-      }
-    });
-    return completedTasks;
+    return this.tasks.filter((task) => task.isCompleted === true);
   }
 
   listIncompleteTasks() {
-    let incompleteTasks = [];
-    this.tasks.forEach((task) => {
-      if (task.isCompleted === false) {
-        incompleteTasks.push(task);
-      }
-    });
-    return incompleteTasks;
+    return this.tasks.filter((task) => task.isCompleted === false);
   }
 
   findTaskByTitle(title) {
