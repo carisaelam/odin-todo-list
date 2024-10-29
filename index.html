@@ -3,39 +3,82 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+
     <title>Task Manager</title>
+    <script
+      src="https://kit.fontawesome.com/5c575ba63c.js"
+      crossorigin="anonymous"
+    ></script>
   <script defer src="main.js"></script></head>
   <body>
-    <h1>...</h1>
-    <a href="test.html">TEST</a>
-    <form class="add-task-form">
-      <label for="title">Title</label>
-      <input type="text" name="title" id="title" />
+    <header>
+      <div class="header__container">
+        <h1><i class="fa-solid fa-list-check"></i> Task Manager</h1>
+      </div>
+    </header>
 
-      <label for="description">Description</label>
-      <input type="text" name="description" id="description" />
+    <aside>
+      <div class=".sidebar__container">
+        <h2>Sidebar</h2>
+        <div class="icon__container">
+          <div class="icon"><i class="fa-solid fa-inbox"></i></div>
+          <div class="icon"><i class="fa-solid fa-calendar-week"></i></div>
+          <div class="icon"><i class="fa-solid fa-house"></i></div>
+          <div class="icon"><i class="fa-solid fa-plus"></i></div>
+        </div>
+      </div>
+    </aside>
 
-      <label for="due_date">Due Date</label>
-      <input type="date" name="due-date" id="due-date" />
+    <main>
+      <div class="main__container">
+        <!-- Add Task Form -->
+        <div class="add__task__form__container">
+          <h3>Add Task Form</h3>
+          <form class="add-task-form">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" />
 
-      <label for="project">Project</label>
-      <select name="project" id="project">
-      </select>
+            <label for="description">Description</label>
+            <input type="text" name="description" id="description" />
 
-      <input type="submit" value="Add Task" />
-    </form>
+            <label for="due_date">Due Date</label>
+            <input type="date" name="due-date" id="due-date" />
 
-    <br />
-    <form class="new__project__form">
-      <input
-        type="text"
-        name="new-project"
-        id="new-project"
-        placeholder="New Project"
-      />
-      <input type="submit" value="Create" />
-    </form>
+            <label for="project">Project</label>
+            <select name="project" id="project"></select>
 
-    <div class="project__display"></div>
+            <input type="submit" value="Add Task" />
+          </form>
+        </div>
+
+        <!-- New Project Form -->
+        <div class="new__project__form__container">
+          <h3>New Project Form</h3>
+          <form class="new__project__form">
+            <input
+              type="text"
+              name="new-project"
+              id="new-project"
+              placeholder="New Project"
+            />
+            <input type="submit" value="Create" />
+          </form>
+        </div>
+
+        <div class="project__display"></div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer__container">
+        <p>Footer content</p>
+      </div>
+    </footer>
   </body>
 </html>
