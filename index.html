@@ -39,21 +39,29 @@
       <div class="main__container">
         <!-- Add Task Form -->
         <div class="add__task__form__container">
-          <h3>Add Task Form</h3>
-          <form class="add-task-form">
-            <label for="title">Title</label>
-            <input type="text" name="title" id="title" />
+          <h3>New Task</h3>
+          <form class="add__task__form">
+            <div class="form__element">
+              <label for="title">Title</label>
+              <input type="text" name="title" id="title" />
+            </div>
 
-            <label for="description">Description</label>
-            <input type="text" name="description" id="description" />
+            <div class="form__element">
+              <label for="description">Description</label>
+              <input type="text" name="description" id="description" />
+            </div>
 
-            <label for="due_date">Due Date</label>
-            <input type="date" name="due-date" id="due-date" />
+            <div class="form__element">
+              <label for="due-date">Due Date</label>
+              <input type="date" name="due-date" id="due-date" />
+            </div>
 
-            <label for="project">Project</label>
-            <select name="project" id="project"></select>
+            <div class="form__element">
+              <label for="project">Project</label>
+              <select name="project" id="project"></select>
+            </div>
 
-            <input type="submit" value="Add Task" />
+            <div class="form__element"><input class="button" type="submit" value="Add Task" /></div>
           </form>
         </div>
 
@@ -71,7 +79,27 @@
           </form>
         </div>
 
-        <div class="project__display"></div>
+        <!-- Project Display -->
+        <div class="project__display">
+          <h3>Project Title</h3>
+          <div class="task__list__container">
+            <ul class="task__container">
+
+              <!-- Single Task -->
+              <div class="single__task">
+                <input type="checkbox" name="task" id="task1" />
+                <label for="task1">Task 1</label>
+              </div>
+              
+              <!-- Single Task -->
+              <div class="single__task">
+                <input type="checkbox" name="task" id="task2" />
+                <label for="task2">Task 2</label>
+              </div>
+
+            </ul>
+          </div>
+        </div>
       </div>
     </main>
 
