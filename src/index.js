@@ -1,18 +1,13 @@
 import './style.css';
 
 import { Task } from './modules/task.js';
-import { Project } from './modules/project.js';
 import { ProjectManager } from './modules/projectManager.js';
 
 // DOM Elements
 const addTaskForm = document.querySelector('.add__task__form');
 const addTaskButton = document.querySelector('.add__task__button');
-const titleInput = document.getElementById('title');
-const descriptionInput = document.getElementById('description');
-const dueDateInput = document.getElementById('due-date');
 const projectInput = document.getElementById('project');
 const newProjectInput = document.getElementById('new-project');
-const projectDisplay = document.querySelector('.project__display');
 const newProjectForm = document.querySelector('.new__project__form');
 const deleteButton = document.querySelector('.delete__button');
 
@@ -46,6 +41,14 @@ newProjectForm.addEventListener('submit', (e) => {
 
 // Creates a new task and assigns to project
 addTaskForm.addEventListener('submit', (e) => {
+  const titleInput = document.getElementById('title');
+  const descriptionInput = document.getElementById('description');
+  const dueDateInput = document.getElementById('due-date');
+  const projectDisplay = document.querySelector('.project__display');
+
+
+
+
   e.preventDefault();
 
   // Sets selectedProject as the element in the projects array that matches the project.title
