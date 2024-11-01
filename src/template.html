@@ -39,7 +39,7 @@
       <div class="main__container">
         <!-- Add Task Form -->
         <div class="add__task__form__container">
-          <form class="add__task__form">
+          <form class="add__task__form hidden">
             <h3>New Task</h3>
             <p class="delete__button">x</p>
             <div class="form__element">
@@ -62,7 +62,9 @@
               <select name="project" id="project"></select>
             </div>
 
-            <div class="form__element"><input class="button" type="submit" value="Add Task" /></div>
+            <div class="form__element">
+              <input class="button" type="submit" value="Add Task" />
+            </div>
           </form>
         </div>
 
@@ -89,7 +91,6 @@
           <h3>Project Title</h3>
           <div class="task__list__container">
             <div class="task__container">
-
               <!-- Single Task -->
               <!-- <div class="single__task">
                 <input type="checkbox" name="task" id="task1" />

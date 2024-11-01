@@ -49,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const titleInput = document.getElementById('title');
     const descriptionInput = document.getElementById('description');
     const dueDateInput = document.getElementById('due-date');
-    const projectDisplay = document.querySelector('.project__display');
 
     // Sets selectedProject as the element in the projects array that matches the project.title
     const selectedProjectTitle = projectInput.value || 'Inbox';
@@ -73,11 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     selectedProject.addTaskToProject(task);
-    // selectedProject.listTasks();
     createSingleTaskHTML(task);
     addTaskForm.classList.toggle('hidden');
-
-    // projectDisplay.textContent = '';
 
     titleInput.value = '';
     descriptionInput.value = '';
@@ -95,27 +91,23 @@ document.addEventListener('DOMContentLoaded', () => {
     addTaskForm.classList.toggle('hidden');
   });
 
+  // Appends HTML for the task to the UI 
   function createSingleTaskHTML(task) {
     if (!taskContainer) {
       console.error('task__container not found');
       return;
     }
 
-    const singleTaskDiv = document.createElement('div');
-    singleTaskDiv.classList.add('single__task');
+    const tempDiv = document.createElement('div');
 
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.name = 'task';
-    checkbox.id = task.createdAt;
+    tempDiv.innerHTML = `
+      <div class="single__task">
+        <input type="checkbox" name="task" id="${task.createdAt}" />
+        <label for="${task.createdAt}">${task.title}</label>
+      </div>
 
-    const label = document.createElement('label');
-    label.htmlFor = task.createdAt;
-    label.textContent = task.title;
+    `;
 
-    singleTaskDiv.appendChild(checkbox);
-    singleTaskDiv.appendChild(label);
-
-    taskContainer.appendChild(singleTaskDiv);
+    taskContainer.appendChild(tempDiv.firstElementChild);
   }
 });
