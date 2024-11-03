@@ -28,7 +28,7 @@ export class ProjectManager {
     return projectTitles;
   }
 
-  // Lists a specific project given the title
+  // Lists and returns a specific project given the title
   listSpecificProject(title) {
     const foundProject = this.projects.find(
       (project) => project.title.toLowerCase() === title.toLowerCase()

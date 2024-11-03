@@ -16,6 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const newProjectForm = document.querySelector('.new__project__form');
   const deleteButton = document.querySelector('.delete__button');
   const projectDisplay = document.querySelector('.project__display');
+  const projectDisplayButtons = document.querySelectorAll(
+    '.project__display__button'
+  );
+  const displayAllProjectsButton = document.getElementById(
+    'display__all__projects__button'
+  );
 
   // Variables
   const projectManager = new ProjectManager();
@@ -34,6 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize with Inbox
   addProjectsToDropdown(projectManager.projects[0]);
+
+  // Displays all projects at start
+  populateProjectDisplay();
 
   // EVENT LISTENERS
 
@@ -101,6 +110,25 @@ document.addEventListener('DOMContentLoaded', () => {
     addTaskFormContainer.classList.toggle('hidden');
   });
 
+  // Adds filter to project display
+  projectDisplayButtons.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      let title = e.target.textContent;
+      console.log('title', title);
+      const selectedProject = projectManager.listSpecificProject(title);
+      projectDisplay.textContent = '';
+
+      displaySingleProject(selectedProject);
+    });
+  });
+
+  // Display all projects
+  displayAllProjectsButton.addEventListener('click', () => {
+    populateProjectDisplay();
+  });
+
+  // Functions
+
   // Appends HTML for the task to the UI
   function createSingleTaskHTML(task, taskContainer) {
     if (!taskContainer) {
@@ -113,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tempDiv.innerHTML = `
       <div class="single__task">
         <input type="checkbox" name="task" id="${task.createdAt}" />
-        <label for="${task.createdAt}">${task.title}</label>
+        <label class="single__task__title" for="${task.createdAt}">${task.title}</label>
       </div>
 
     `;
@@ -132,13 +160,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tempDiv.innerHTML = `
           <div class="single__project__container">
-            <h3>${project.title}</h3>
+            <h3 class="single__project__title">${project.title}</h3>
             <div class="task__list__container">
               <div class="task__container" id="${project.title.toLowerCase()}__container"></div>
             </div>
           </div>
-    
-    
     `;
 
     projectDisplay.appendChild(tempDiv.firstElementChild);
@@ -160,5 +186,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // populateProjectDisplay();
+  // Filters projectDisplay for single project
+  function displaySingleProject(project) {
+    projectDisplay.textContent = '';
+
+    createSingleProjectHTML(project);
+
+    const taskContainer = document.getElementById(
+      `${project.title.toLowerCase()}__container`
+    );
+
+    project.tasks.forEach((task) => {
+      createSingleTaskHTML(task, taskContainer);
+    });
+  }
 });
