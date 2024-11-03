@@ -7,15 +7,19 @@ import { differenceInHours } from 'date-fns';
 document.addEventListener('DOMContentLoaded', () => {
   // DOM Elements
   const addTaskForm = document.querySelector('.add__task__form');
+  const addTaskFormContainer = document.querySelector(
+    '.add__task__form__container'
+  );
   const addTaskButton = document.querySelector('.add__task__button');
   const projectInput = document.getElementById('project');
   const newProjectInput = document.getElementById('new-project');
   const newProjectForm = document.querySelector('.new__project__form');
   const deleteButton = document.querySelector('.delete__button');
-  const taskContainer = document.querySelector('.task__container');
+  const projectDisplay = document.querySelector('.project__display');
 
   // Variables
   const projectManager = new ProjectManager();
+  const projects = projectManager.projects;
 
   // Adds a project option to dropdown UI
   function addProjectsToDropdown(project) {
@@ -23,6 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
     projectOption.value = project.title;
     projectOption.innerHTML = `${project.title}`;
     projectInput.appendChild(projectOption);
+
+    console.log('Project added: ', project.title);
+    console.log(projects);
   }
 
   // Initialize with Inbox
@@ -37,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (project) {
       addProjectsToDropdown(project);
+      populateProjectDisplay(project);
     }
 
     newProjectInput.value = '';
@@ -72,8 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     selectedProject.addTaskToProject(task);
-    createSingleTaskHTML(task);
-    addTaskForm.classList.toggle('hidden');
+    populateProjectDisplay(project);
+
+    // createSingleTaskHTML(task);
+    addTaskFormContainer.classList.toggle('hidden');
 
     titleInput.value = '';
     descriptionInput.value = '';
@@ -83,18 +93,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Opens addTaskForm
   addTaskButton.addEventListener('click', () => {
-    addTaskForm.classList.toggle('hidden');
+    addTaskFormContainer.classList.toggle('hidden');
   });
 
   // Closes add task menu
   deleteButton.addEventListener('click', () => {
-    addTaskForm.classList.toggle('hidden');
+    addTaskFormContainer.classList.toggle('hidden');
   });
 
-  // Appends HTML for the task to the UI 
-  function createSingleTaskHTML(task) {
+  // Appends HTML for the task to the UI
+  function createSingleTaskHTML(task, taskContainer) {
     if (!taskContainer) {
-      console.error('task__container not found');
+      console.error('taskContainer not found');
       return;
     }
 
@@ -110,4 +120,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     taskContainer.appendChild(tempDiv.firstElementChild);
   }
+
+  // Appends HTML for all projects to the UI
+  function createSingleProjectHTML(project) {
+    if (!projectDisplay) {
+      console.error('project__display not found');
+      return;
+    }
+
+    const tempDiv = document.createElement('div');
+
+    tempDiv.innerHTML = `
+          <div class="single__project__container">
+            <h3>${project.title}</h3>
+            <div class="task__list__container">
+              <div class="task__container" id="${project.title.toLowerCase()}__container"></div>
+            </div>
+          </div>
+    
+    
+    `;
+
+    projectDisplay.appendChild(tempDiv.firstElementChild);
+  }
+
+  // Cycles through projects and creates HTML
+  function populateProjectDisplay() {
+    projectDisplay.textContent = '';
+    projects.forEach((project) => {
+      createSingleProjectHTML(project);
+
+      const taskContainer = document.getElementById(
+        `${project.title.toLowerCase()}__container`
+      );
+
+      project.tasks.forEach((task) => {
+        createSingleTaskHTML(task, taskContainer);
+      });
+    });
+  }
+
+  // populateProjectDisplay();
 });
