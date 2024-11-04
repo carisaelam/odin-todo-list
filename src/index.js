@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Opens addTaskForm
   addTaskButton.addEventListener('click', () => {
     addTaskFormContainer.classList.toggle('hidden');
+    addTaskForm.querySelector('input').focus();
   });
 
   // Closes add task menu
