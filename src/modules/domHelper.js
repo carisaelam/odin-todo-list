@@ -56,4 +56,20 @@ export class DOMHelper {
 
     this.projectDisplay.appendChild(tempDiv.firstElementChild);
   }
+
+  // Cycles through projects and creates HTML
+  populateProjectDisplay(projects) {
+    this.projectDisplay.textContent = '';
+    projects.forEach((project) => {
+      this.createSingleProjectHTML(project);
+
+      const taskContainer = document.getElementById(
+        `${project.title.toLowerCase()}__container`
+      );
+
+      project.tasks.forEach((task) => {
+        this.createSingleTaskHTML(task, taskContainer);
+      });
+    });
+  }
 }
