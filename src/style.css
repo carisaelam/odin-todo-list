@@ -95,23 +95,29 @@ body {
     'header header header'
     'sidebar main main'
     'footer footer footer';
+  grid-template-rows: auto 1fr auto;
 }
+
+/* Header */
 
 header {
   grid-area: header;
-  background-color: rgba(255, 0, 0, 0.331);
+  background-color: rgba(190, 185, 185, 0.331);
   padding: 1rem;
 }
 
+/* Sidebar */
 aside {
   grid-area: sidebar;
   background-color: rgba(255, 166, 0, 0.285);
   padding: 1rem;
 }
 
+/* Main */
 main {
   grid-area: main;
-  background-color: rgba(0, 0, 255, 0.332);
+  background-color: rgba(91, 91, 120, 0.332);
+  overflow-y: auto;
 }
 
 /* Add Task Form */
@@ -172,9 +178,10 @@ form {
   list-style-type: circle;
 }
 
+/* Footer */
 footer {
   grid-area: footer;
-  background-color: rgba(128, 0, 128, 0.393);
+  background-color: rgba(60, 34, 60, 0.393);
 }
 
 @media (max-width: 768px) {
@@ -183,6 +190,7 @@ footer {
       'header header header'
       'main main main'
       'footer footer footer';
+    grid-template-rows: auto 1fr auto;
   }
 
   aside {
@@ -196,7 +204,7 @@ footer {
 }
 
 .darken {
-  opacity: .9;
+  opacity: 0.9;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
