@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const projectDisplayButtons = document.querySelectorAll(
     '.project__display__button'
   );
+  const projectDisplayButtonsContainer = document.querySelector(
+    '.project__display__buttons__container'
+  );
   const displayAllProjectsButton = document.getElementById(
     'display__all__projects__button'
   );
@@ -54,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (project) {
       addProjectsToDropdown(project);
       populateProjectDisplay(project);
+      generateProjectButton(project);
     }
 
     newProjectInput.value = '';
@@ -112,15 +116,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Adds filter to project display
-  projectDisplayButtons.forEach((button) => {
-    button.addEventListener('click', (e) => {
-      let title = e.target.textContent;
-      console.log('title', title);
+  projectDisplayButtonsContainer.addEventListener('click', (e) => {
+    if (e.target.classList.contains('project__display__button')) {
+      const title = e.target.textContent;
+      console.log('Selected project title', title);
+
       const selectedProject = projectManager.listSpecificProject(title);
       projectDisplay.textContent = '';
-
       displaySingleProject(selectedProject);
-    });
+    }
   });
 
   // Display all projects
@@ -128,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     populateProjectDisplay();
   });
 
-  // Functions
+  // FUNCTIONS
 
   // Appends HTML for the task to the UI
   function createSingleTaskHTML(task, taskContainer) {
@@ -200,5 +204,16 @@ document.addEventListener('DOMContentLoaded', () => {
     project.tasks.forEach((task) => {
       createSingleTaskHTML(task, taskContainer);
     });
+  }
+
+  // Generates button for new projects
+  function generateProjectButton(project) {
+    const tempButton = document.createElement('button');
+    tempButton.textContent = project.title;
+    tempButton.classList.add('project__display__button');
+
+    projectDisplayButtonsContainer.appendChild(tempButton);
+
+    console.log('new project button', project.title);
   }
 });
