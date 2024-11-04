@@ -30,13 +30,6 @@ export class Project {
     return tasks;
   }
 
-  listSpecificTask(task) {
-    console.log(task.project.title);
-    console.log(task.title);
-    console.log(format(task.dueDate, 'MM/dd/yyyy'));
-    console.log(task.priority);
-  }
-
   listCompletedTasks() {
     return this.tasks.filter((task) => task.isCompleted === true);
   }
