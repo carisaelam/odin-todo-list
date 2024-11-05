@@ -27,10 +27,14 @@
       <div class="sidebar__container">
         <h2>Sidebar</h2>
         <div class="icon__container">
-          <div class="icon"><i class="fa-solid fa-inbox"></i></div>
-          <div class="icon"><i class="fa-solid fa-calendar-week"></i></div>
-          <div class="icon"><i class="fa-solid fa-house"></i></div>
-          <div class="icon"><i class="fa-solid fa-plus"></i></div>
+          <div class="icon inbox"><i class="fa-solid fa-inbox"></i></div>
+          <div class="icon upcoming">
+            <i class="fa-solid fa-calendar-week"></i>
+          </div>
+          <div class="icon home"><i class="fa-solid fa-house"></i></div>
+          <div class="icon add__task__button">
+            <i class="fa-solid fa-plus"></i>
+          </div>
         </div>
       </div>
     </aside>
@@ -68,30 +72,33 @@
           </form>
         </div>
 
-        <div class="add__task__button__container">
+        <!-- <div class="add__task__button__container">
           <button class="add__task__button">Add Task</button>
-        </div>
-
-        <!-- New Project Form -->
-        <div class="new__project__form__container">
-          <h3>New Project Form</h3>
-          <form class="new__project__form">
-            <input
-              type="text"
-              name="new-project"
-              id="new-project"
-              placeholder="New Project"
-              required
-            />
-            <input type="submit" value="Create" />
-          </form>
-        </div>
+        </div> -->
 
         <!-- Project Display -->
-        <div class="project__display__buttons__container">
-          <button id="display__all__projects__button">All</button>
-          <button class="project__display__button">Inbox</button>
+
+        <div class="project__display__selection__container">
+          <!-- Buttons container -->
+          <div class="project__display__buttons__container">
+            <button id="display__all__projects__button">All</button>
+            <button class="project__display__button">Inbox</button>
+          </div>
+          <!-- New Project Form -->
+          <div class="new__project__form__container">
+            <form class="new__project__form">
+              <input
+                type="text"
+                name="new-project"
+                id="new-project"
+                placeholder="New Project"
+                required
+              />
+              <button type="submit" class="create__project__button">+</button>
+            </form>
+          </div>
         </div>
+
         <div class="project__display"></div>
       </div>
     </main>
