@@ -2,7 +2,15 @@ import { Project } from './project.js';
 
 export class ProjectManager {
   constructor() {
-    this.projects = [new Project('Inbox')];
+    const storedProjects = JSON.parse(localStorage.getItem('projects'));
+
+    if (storedProjects && storedProjects.length > 0) {
+      this.projects = storedProjects.map(
+        (project) => new Project(project.title)
+      );
+    } else {
+      this.projects = [new Project('Inbox')];
+    }
   }
 
   // Creates a new project with title
@@ -18,7 +26,25 @@ export class ProjectManager {
 
     const newProject = new Project(title);
     this.projects.push(newProject);
+    localStorage.setItem('projects', JSON.stringify(this.projects));
     return newProject;
+  }
+
+  // Deletes a project
+  deleteProject(title) {
+    const projectIndex = this.projects.findIndex(
+      (project) => project.title.toLowerCase() === title.toLowerCase()
+    );
+
+    if (projectIndex != -1) {
+      this.projects.splice(projectIndex, 1);
+      localStorage.setItem('projects', JSON.stringify(this.projects));
+
+      console.log(`Project ${title} deleted.`);
+    } else {
+      console.log(`Project ${title} not found`);
+      return null;
+    }
   }
 
   // Lists all projects

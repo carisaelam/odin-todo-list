@@ -3,6 +3,22 @@ import { Project } from '../src/modules/project.js';
 import { Task } from '../src/modules/task.js';
 import { ProjectManager } from '../src/modules/projectManager.js';
 
+global.localStorage = {
+  storage: {},
+  getItem(key) {
+    return this.storage[key] || null;
+  },
+  setItem(key, value) {
+    this.storage[key] = value.toString();
+  },
+  removeItem(key) {
+    delete this.storage[key];
+  },
+  clear() {
+    this.storage = {};
+  },
+};
+
 describe('Project Manager Class', () => {
   let projectManager;
   const task1 = new Task('Task1', 'Desc1', '2035-10-25');
@@ -38,7 +54,7 @@ describe('Project Manager Class', () => {
   // List all projects
   describe('List All Projects', () => {
     it('should return a list of project titles', () => {
-      expect(projectManager.listAllProjects()).toEqual(['Inbox']);
+      expect(projectManager.listAllProjects()).toEqual(['Inbox', 'Work']);
     });
 
     it('should work with an added project', () => {
@@ -59,6 +75,23 @@ describe('Project Manager Class', () => {
       const specificListed = projectManager.listSpecificProject('Invalid');
 
       expect(specificListed).toBeNull;
+    });
+  });
+
+  // Delete Specific Project
+  describe('Delete Project', () => {
+    beforeEach(() => {
+      projectManager.createProject('Work');
+    });
+
+    it('should delete the given project', () => {
+      projectManager.deleteProject('Work');
+      expect(projectManager.listAllProjects()).toEqual(['Inbox']);
+    });
+
+    it('should return null for project not found', () => {
+      projectManager.deleteProject('Invalid');
+      expect(projectManager.listAllProjects()).toBeNull;
     });
   });
 });

@@ -7,13 +7,22 @@ export class DOMHelper {
   }
 
   // Adds a project option to dropdown UI
-  addProjectsToDropdown(project) {
-    const projectOption = document.createElement('option');
-    projectOption.value = project.title;
-    projectOption.innerHTML = `${project.title}`;
-    this.projectInput.appendChild(projectOption);
+  addProjectsToDropdown(projects) {
+    this.projectInput.innerHTML = '';
 
-    console.log('Project added: ', project.title);
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.innerHTML = 'Select a project';
+    this.projectInput.appendChild(defaultOption);
+
+    projects.forEach((project) => {
+      const projectOption = document.createElement('option');
+      projectOption.value = project.title;
+      projectOption.innerHTML = `${project.title}`;
+      this.projectInput.appendChild(projectOption);
+
+      console.log('Project added: ', project.title);
+    });
   }
 
   // Appends HTML for the task to the UI
@@ -47,10 +56,11 @@ export class DOMHelper {
 
     tempDiv.innerHTML = `
         <div class="single__project__container">
-        <h3 class="single__project__title">${project.title}</h3>
-        <div class="task__list__container">
-        <div class="task__container" id="${project.title.toLowerCase()}__container"></div>
-        </div>
+          <h3 class="single__project__title">${project.title}</h3>
+          <button class="delete__project__button">x</button>
+          <div class="task__list__container">
+          <div class="task__container" id="${project.title.toLowerCase()}__container"></div>
+          </div>
         </div>
         `;
 

@@ -22,6 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const projectDisplayButtonsContainer = document.querySelector(
     '.project__display__buttons__container'
   );
+  const deleteProjectButtons = document.querySelectorAll(
+    '.delete__project__button'
+  );
 
   // Variables
   const domHelper = new DOMHelper();
@@ -29,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const projects = projectManager.projects;
 
   // Initialize with Inbox
-  domHelper.addProjectsToDropdown(projectManager.projects[0]);
+  domHelper.addProjectsToDropdown(projectManager.projects);
 
   // Displays all projects at start
   domHelper.populateProjectDisplay(projects);
@@ -42,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const project = projectManager.createProject(newProjectInput.value);
 
     if (project) {
-      domHelper.addProjectsToDropdown(project);
+      domHelper.addProjectsToDropdown(projects);
       domHelper.populateProjectDisplay(projects);
       generateProjectButton(project);
     }
@@ -117,6 +120,27 @@ document.addEventListener('DOMContentLoaded', () => {
   // Display all projects
   displayAllProjectsButton.addEventListener('click', () => {
     domHelper.populateProjectDisplay(projects);
+  });
+
+  // Delete project
+  projectDisplay.addEventListener('click', (e) => {
+    if (e.target.classList.contains('delete__project__button')) {
+      console.log('e.target', e.target);
+      const projectTitle = e.target
+        .closest('.single__project__container')
+        .querySelector('.single__project__title')
+        .textContent.trim();
+
+      console.log('projectTitle', projectTitle);
+
+      const confirmed = confirm(`Delete Project: ${projectTitle}?`);
+
+      if (confirmed) {
+        projectManager.deleteProject(projectTitle);
+        domHelper.populateProjectDisplay(projectManager.projects);
+        domHelper.addProjectsToDropdown(projectManager.projects);
+      }
+    }
   });
 
   // FUNCTIONS
