@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const projects = projectManager.projects;
 
   // Initialize with Inbox
-  domHelper.addProjectsToDropdown(projectManager.projects);
+  domHelper.addProjectsToDropdown(projects);
 
   // Displays all projects at start
   domHelper.populateProjectDisplay(projects);

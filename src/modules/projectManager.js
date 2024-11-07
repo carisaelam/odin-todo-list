@@ -5,9 +5,11 @@ export class ProjectManager {
     const storedProjects = JSON.parse(localStorage.getItem('projects'));
 
     if (storedProjects && storedProjects.length > 0) {
-      this.projects = storedProjects.map(
-        (project) => new Project(project.title)
-      );
+      this.projects = storedProjects.map((project) => {
+        const newProject = new Project(project.title);
+
+        return newProject;
+      });
     } else {
       this.projects = [new Project('Inbox')];
     }
