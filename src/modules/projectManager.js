@@ -1,18 +1,40 @@
 import { Project } from './project.js';
+import { Task } from './task.js';
 
 export class ProjectManager {
   constructor() {
-    const storedProjects = JSON.parse(localStorage.getItem('projects'));
+    const storedProjects = JSON.parse(localStorage.getItem('projects') || '[]');
 
-    if (storedProjects && storedProjects.length > 0) {
-      this.projects = storedProjects.map((project) => {
-        const newProject = new Project(project.title);
+    console.log('storedProjects', storedProjects);
 
-        return newProject;
+    if (storedProjects.length > 0) {
+      this.projects = storedProjects.map((projectData) => {
+        const project = new Project(projectData.title);
+        projectData.tasks.forEach((taskData) => {
+          const task = new Task(
+            taskData.title,
+            taskData.description,
+            taskData.dueDate,
+            taskData.priority,
+            taskData.isCompleted,
+            taskData.id,
+            project
+          );
+          project.addTaskToProject(task);
+        });
+
+        return project;
       });
     } else {
       this.projects = [new Project('Inbox')];
     }
+
+    localStorage.setItem('projects', JSON.stringify(this.projects));
+  }
+
+  // Helper function to save to localStorage
+  saveToLocalStorage() {
+    localStorage.setItem('projects', JSON.stringify(this.projects));
   }
 
   // Creates a new project with title
@@ -28,7 +50,8 @@ export class ProjectManager {
 
     const newProject = new Project(title);
     this.projects.push(newProject);
-    localStorage.setItem('projects', JSON.stringify(this.projects));
+
+    this.saveToLocalStorage();
     return newProject;
   }
 
@@ -40,12 +63,24 @@ export class ProjectManager {
 
     if (projectIndex != -1) {
       this.projects.splice(projectIndex, 1);
-      localStorage.setItem('projects', JSON.stringify(this.projects));
+      this.saveToLocalStorage();
 
       console.log(`Project ${title} deleted.`);
     } else {
       console.log(`Project ${title} not found`);
       return null;
+    }
+  }
+
+  // Add task to a project
+  addTaskToProject(projectTitle, task) {
+    const project = this.projects.find(
+      (project) => project.title.toLowerCase() === projectTitle.toLowerCase()
+    );
+
+    if (project) {
+      project.addTaskToProject(task);
+      this.saveToLocalStorage();
     }
   }
 

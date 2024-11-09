@@ -78,11 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
       descriptionInput.value,
       dueDateInput.value,
       undefined,
-      undefined,
-      selectedProject
+      false,
+      Date.now()
     );
 
-    selectedProject.addTaskToProject(task);
+    projectManager.addTaskToProject(selectedProjectTitle, task);
     domHelper.populateProjectDisplay(projects);
 
     // createSingleTaskHTML(task);

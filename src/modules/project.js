@@ -10,7 +10,6 @@ export class Project {
   }
 
   addTaskToProject(task) {
-    task.project = this;
     this.tasks.push(task);
   }
 
@@ -21,7 +20,6 @@ export class Project {
   listTasks() {
     const tasks = [];
     this.tasks.forEach((task) => {
-      console.log(task.project.title);
       console.log(task.title);
       console.log(format(task.dueDate, 'MM/dd/yyyy'));
       console.log(task.priority);

@@ -8,9 +8,10 @@ export class Task {
     dueDate,
     priority = 3,
     isCompleted = false,
-    project
+    id = Date.now()
   ) {
     validation.validateTask({ title, description, dueDate, priority });
+    this.id = id;
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;

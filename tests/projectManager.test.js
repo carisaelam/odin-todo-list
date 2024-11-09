@@ -21,9 +21,9 @@ global.localStorage = {
 
 describe('Project Manager Class', () => {
   let projectManager;
-  const task1 = new Task('Task1', 'Desc1', '2035-10-25');
-  const task2 = new Task('Task2', 'Desc2', '2035-11-25');
-  const task3 = new Task('Task3', 'Desc3', '2035-12-25');
+  const task1 = new Task('Task1', 'Desc1', '2035-10-25', 2, false, Date.now());
+  const task2 = new Task('Task2', 'Desc2', '2035-11-25', 2, false, Date.now());
+  const task3 = new Task('Task3', 'Desc3', '2035-12-25', 2, false, Date.now());
 
   beforeEach(() => {
     projectManager = new ProjectManager();
@@ -34,6 +34,12 @@ describe('Project Manager Class', () => {
     // Project Default
     it('should add a default Inbox project', () => {
       expect(projectManager.projects).toEqual([new Project('Inbox')]);
+    });
+
+    // Tasks Default
+    it('should add the tasks to the project', () => {
+      projectManager.addTaskToProject('Inbox', task1);
+      expect(projectManager.projects[0].tasks).toContain(task1);
     });
   });
 
@@ -92,6 +98,27 @@ describe('Project Manager Class', () => {
     it('should return null for project not found', () => {
       projectManager.deleteProject('Invalid');
       expect(projectManager.listAllProjects()).toBeNull;
+    });
+  });
+
+  // Add Task to Project
+  describe('Add Task to Project', () => {
+    beforeEach(() => {
+      projectManager.createProject('Work');
+    });
+
+    let task = new Task(
+      'Title',
+      'Description',
+      Date.now() + 1,
+      2,
+      false,
+      Date.now()
+    );
+
+    it('should add a task to the Work project', () => {
+      projectManager.addTaskToProject('Work', task);
+      expect(projectManager.projects[1].tasks).toContain(task);
     });
   });
 });
