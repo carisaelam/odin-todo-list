@@ -4,6 +4,9 @@ export class DOMHelper {
   constructor() {
     this.projectInput = document.getElementById('project');
     this.projectDisplay = document.querySelector('.project__display');
+    this.projectDisplayButtonsContainer = document.querySelector(
+      '.project__display__buttons__container'
+    );
   }
 
   // Adds a project option to dropdown UI
@@ -22,6 +25,30 @@ export class DOMHelper {
       this.projectInput.appendChild(projectOption);
 
       console.log('Project added: ', project.title);
+    });
+  }
+
+  // Generates button for new projects
+  generateProjectButtons(projects) {
+    const allButton = document.getElementById('display__all__projects__button');
+
+    // Clear all existing buttons besides the "All"
+    const buttons = Array.from(this.projectDisplayButtonsContainer.children);
+
+    buttons.forEach((button) => {
+      if (button !== allButton) {
+        this.projectDisplayButtonsContainer.removeChild(button);
+      }
+    });
+
+    projects.forEach((project) => {
+      const tempButton = document.createElement('button');
+      tempButton.textContent = project.title;
+      tempButton.classList.add('project__display__button');
+
+      this.projectDisplayButtonsContainer.appendChild(tempButton);
+
+      console.log('new project button', project.title);
     });
   }
 

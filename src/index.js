@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Displays all projects at start
   domHelper.populateProjectDisplay(projects);
+  domHelper.generateProjectButtons(projects);
 
   // EVENT LISTENERS
 
@@ -47,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (project) {
       domHelper.addProjectsToDropdown(projects);
       domHelper.populateProjectDisplay(projects);
-      generateProjectButton(project);
+      domHelper.generateProjectButtons(projects);
     }
 
     newProjectInput.value = '';
@@ -137,8 +138,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (confirmed) {
         projectManager.deleteProject(projectTitle);
-        domHelper.populateProjectDisplay(projectManager.projects);
-        domHelper.addProjectsToDropdown(projectManager.projects);
+        domHelper.populateProjectDisplay(projects);
+        domHelper.addProjectsToDropdown(projects);
+        domHelper.generateProjectButtons(projects);
       }
     }
   });
@@ -158,16 +160,5 @@ document.addEventListener('DOMContentLoaded', () => {
     project.tasks.forEach((task) => {
       domHelper.createSingleTaskHTML(task, taskContainer);
     });
-  }
-
-  // Generates button for new projects
-  function generateProjectButton(project) {
-    const tempButton = document.createElement('button');
-    tempButton.textContent = project.title;
-    tempButton.classList.add('project__display__button');
-
-    projectDisplayButtonsContainer.appendChild(tempButton);
-
-    console.log('new project button', project.title);
   }
 });
