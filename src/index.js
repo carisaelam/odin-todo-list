@@ -3,6 +3,7 @@ import './style.css';
 import { Task } from './modules/task.js';
 import { ProjectManager } from './modules/projectManager.js';
 import { DOMHelper } from './modules/domHelper.js';
+import { Project } from './modules/project.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // DOM Elements
@@ -22,8 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const projectDisplayButtonsContainer = document.querySelector(
     '.project__display__buttons__container'
   );
-  const deleteProjectButtons = document.querySelectorAll(
-    '.delete__project__button'
+  const taskDetailsContainer = document.querySelector(
+    '.task__details__container'
   );
 
   // Variables
@@ -142,6 +143,33 @@ document.addEventListener('DOMContentLoaded', () => {
         domHelper.addProjectsToDropdown(projects);
         domHelper.generateProjectButtons(projects);
       }
+    }
+  });
+
+  // Display task details
+  projectDisplay.addEventListener('click', (e) => {
+    if (e.target.classList.contains('single__task__details')) {
+      const taskTitle = e.target
+        .closest('.single__task')
+        .querySelector('.single__task__title')
+        .textContent.trim();
+      const projectTitle = e.target
+        .closest('.single__project__container')
+        .querySelector('.single__project__title')
+        .textContent.trim();
+
+      const project = projectManager.listSpecificProject(projectTitle);
+
+      const task = project.findTaskByTitle(taskTitle);
+
+      domHelper.displaySingleTask(task);
+    }
+  });
+
+  // Hide task details
+  taskDetailsContainer.addEventListener('click', (e) => {
+    if (e.target.classList.contains('close__task__details')) {
+      domHelper.toggleTaskDetailsDisplay();
     }
   });
 

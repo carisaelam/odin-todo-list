@@ -7,6 +7,9 @@ export class DOMHelper {
     this.projectDisplayButtonsContainer = document.querySelector(
       '.project__display__buttons__container'
     );
+    this.taskDetailsContainer = document.querySelector(
+      '.task__details__container'
+    );
   }
 
   // Adds a project option to dropdown UI
@@ -63,8 +66,11 @@ export class DOMHelper {
 
     tempDiv.innerHTML = `
         <div class="single__task">
-        <input type="checkbox" name="task" id="${task.createdAt}" />
-        <label class="single__task__title" for="${task.createdAt}">${task.title}</label>
+          <input type="checkbox" name="task" id="${task.createdAt}" />
+          <div class="task__and__more__container">
+            <label class="single__task__title" for="${task.createdAt}">${task.title}</label>
+            <p class="single__task__details">+</p>
+          </div>
         </div>
         
         `;
@@ -92,6 +98,34 @@ export class DOMHelper {
         `;
 
     this.projectDisplay.appendChild(tempDiv.firstElementChild);
+  }
+
+  // Appends HTML for task details to the UI
+  displaySingleTask(task) {
+    if (!this.taskDetailsContainer) {
+      console.error('task__details__container not found');
+      return;
+    }
+
+    this.taskDetailsContainer.textContent = '';
+    this.taskDetailsContainer.classList.toggle('hidden');
+
+    const tempDiv = document.createElement('div');
+
+    tempDiv.innerHTML = `
+          <h3>${task.title}</h3>
+          <p>${task.description}</p>
+          <p>${task.dueDate}</p>
+          <p>${task.priority}</p>
+          <p class="close__task__details">x<p>
+        `;
+
+    this.taskDetailsContainer.appendChild(tempDiv);
+  }
+
+  // Toggle task details display
+  toggleTaskDetailsDisplay() {
+    this.taskDetailsContainer.classList.toggle('hidden');
   }
 
   // Cycles through projects and creates HTML

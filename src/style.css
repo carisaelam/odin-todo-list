@@ -179,6 +179,36 @@ form {
   padding: 1rem;
 }
 
+/* Task Details */
+
+.task__details__container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+
+  background-color: aliceblue;
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.close__task__details {
+  position: absolute;
+  top: .5rem; 
+  right: .5rem; 
+}
+
+.single__task {
+  display: flex;
+  gap: .25rem;
+}
+
+.task__and__more__container {
+  display: flex; 
+  gap: .5rem;
+}
+
 .project__display__selection__container {
   display: grid;
   grid-template-columns: 3fr 1fr;
