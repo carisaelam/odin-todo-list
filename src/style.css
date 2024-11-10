@@ -220,7 +220,7 @@ form {
   cursor: pointer;
   background-color: hsl(210, 100%, 46%);
   transform: scale(1.03);
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .project__display {
@@ -262,6 +262,18 @@ footer {
   .icon__container {
     display: flex;
     gap: 1rem;
+  }
+
+  .project__display__selection__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+  }
+
+  .project__display__buttons__container {
+    max-width: 90%;
+    overflow-x: auto;
   }
 }
 
