@@ -117,6 +117,7 @@ export class DOMHelper {
           <p>${task.description}</p>
           <p>${task.dueDate}</p>
           <p>${task.priority}</p>
+          <button class="delete__task__button">Delete</button>
           <i class="fa-solid fa-x close__task__details"></i>
           
         `;

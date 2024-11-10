@@ -84,6 +84,18 @@ export class ProjectManager {
     }
   }
 
+  // Remove task from project
+  removeTaskFromProject(projectTitle, task) {
+    const project = this.projects.find(
+      (project) => project.title.toLowerCase() === projectTitle.toLowerCase()
+    );
+
+    if (project) {
+      project.removeTaskFromProject(task);
+      this.saveToLocalStorage();
+    }
+  }
+
   // Lists all projects
   listAllProjects() {
     const projectTitles = this.projects.map((project) => project.title);
