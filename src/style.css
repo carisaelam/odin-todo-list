@@ -195,18 +195,25 @@ form {
 
 .close__task__details {
   position: absolute;
-  top: .5rem; 
-  right: .5rem; 
+  top: 1rem;
+  right: 1rem;
+  font-size: 0.75rem;
+  cursor: pointer;
 }
 
 .single__task {
   display: flex;
-  gap: .25rem;
+  gap: 0.25rem;
 }
 
 .task__and__more__container {
-  display: flex; 
-  gap: .5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.task__and__more__container p {
+  color: dodgerblue;
+  cursor: pointer;
 }
 
 .project__display__selection__container {
@@ -256,6 +263,8 @@ form {
 
 .project__display {
   margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .single__project__container {
