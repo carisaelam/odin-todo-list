@@ -84,7 +84,7 @@ export class DOMHelper {
     tempDiv.innerHTML = `
         <div class="single__project__container">
           <h3 class="single__project__title">${project.title}</h3>
-          <button class="delete__project__button">x</button>
+          <i class="fa-solid fa-x delete__project__button"></i>
           <div class="task__list__container">
           <div class="task__container" id="${project.title.toLowerCase()}__container"></div>
           </div>
