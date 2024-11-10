@@ -107,16 +107,19 @@ export class DOMHelper {
       return;
     }
 
+    console.log('task', task);
+
     this.taskDetailsContainer.textContent = '';
     this.taskDetailsContainer.classList.toggle('hidden');
 
     const tempDiv = document.createElement('div');
 
     tempDiv.innerHTML = `
-          <h3>${task.title}</h3>
-          <p>${task.description}</p>
-          <p>${task.dueDate}</p>
-          <p>${task.priority}</p>
+          <h3 class="task__details__title">${task.title}</h3>
+          <p class="task__details__description">${task.description}</p>
+          <p class="task__details__project">${task.projectTitle}</p>
+          <p class="task__details__due__date">${task.dueDate}</p>
+          <p class="task__details__priority">${task.priority}</p>
           <button class="delete__task__button">Delete</button>
           <i class="fa-solid fa-x close__task__details"></i>
           

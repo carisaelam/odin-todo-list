@@ -18,7 +18,7 @@ export class ProjectManager {
             taskData.priority,
             taskData.isCompleted,
             taskData.id,
-            project
+            taskData.projectTitle
           );
           project.addTaskToProject(task);
         });

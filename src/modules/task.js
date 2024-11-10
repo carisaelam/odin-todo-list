@@ -8,7 +8,8 @@ export class Task {
     dueDate,
     priority = 3,
     isCompleted = false,
-    id = Date.now()
+    id = Date.now(),
+    projectTitle
   ) {
     validation.validateTask({ title, description, dueDate, priority });
     this.id = id;
@@ -19,6 +20,7 @@ export class Task {
     this.isCompleted = isCompleted;
     // this.project = project;
     this.createdAt = new Date();
+    this.projectTitle = projectTitle
   }
 
   toggleCompleted() {
