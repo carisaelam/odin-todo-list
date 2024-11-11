@@ -3,7 +3,6 @@ import './style.css';
 import { Task } from './modules/task.js';
 import { ProjectManager } from './modules/projectManager.js';
 import { DOMHelper } from './modules/domHelper.js';
-import { Project } from './modules/project.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // DOM Elements
@@ -232,10 +231,5 @@ document.addEventListener('DOMContentLoaded', () => {
     project.tasks.forEach((task) => {
       domHelper.createSingleTaskHTML(task, taskContainer);
     });
-  }
-
-  function deleteTask(projectTitle, task) {
-    const project = projectManager.listSpecificProject(projectTitle);
-    project.removeTaskFromProject(task);
   }
 });
